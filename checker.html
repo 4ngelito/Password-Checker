@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Password Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #password-feedback {
+            margin-top: 10px;
+            font-size: 18px;
+            padding: 8px; /* Add some padding for the background to be visible */
+            border-radius: 4px; /* Optional: Add rounded corners */
+        }
+
+        #password-feedback.weak {
+            color: white;
+            background-color: red;
+        }
+
+        #password-feedback.moderate {
+            color: black;
+            background-color: orange;
+        }
+
+        #password-feedback.strong {
+            color: white;
+            background-color: rgb(40, 151, 40);
+        }
+
+        #password-feedback.very-strong {
+            color: white;
+            background-color: rgb(6, 97, 3); /* A more intense color for very strong */
+        }
+
+        #generated-password {
+            font-weight: bold;
+            color: #333;
+            background-color: #e2e8f0; /* Light gray background */
+            padding: 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="bg-white font-sans antialiased">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto py-6 px-8 flex justify-between items-center">
+            <a href="#" class="flex items-center text-xl font-bold text-black">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a3 3 0 00-3-3H7.5a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5m-3-3L19.5 15m-9-5l-3 3m3 3l3-3m-9-5H7.5a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V6.75a3 3 0 00-3-3H13.5m-3-3L6 15" />
+                </svg>
+                Secure Password Hub
+            </a>
+        </div>
+    </header>
+    <div class="container mx-auto py-10 px-8 br-gray-100">
+        <div class="bg-white rounded shadow-lg overflow-hidden md:grid md:grid-cols-2 md:gap-8">
+            <div class="p-8 md:p-12 flex flex-col justify-center">
+                <h2 class="text-3xl font-bold text-black mb-6">Unlock Stronger Security</h2>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    Protect your digital life with robust passwords. Our Password Checker and Generator tools are designed to help you create and verify secure credentials effortlessly.
+                </p>
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Key Password Criteria:</h3>
+                    <ul class="list-disc list-inside text-gray-600 leading-relaxed">
+                        <li>Minimum 12 characters for optimal security</li>
+                        <li>Incorporate a mix of uppercase and lowercase letters</li>
+                        <li>Include numbers and special symbols for added complexity</li>
+                        <li>Avoid personal information and common words</li>
+                    </ul>
+                </div>
+                <p class="text-gray-700 leading-relaxed">
+                    Ready to enhance your security? Use the tools on the right to check your existing passwords or generate new, strong ones.
+                </p>
+                <div class="mt-8">
+                    <button class="bg-black hover:bg-white hover:text-black text-white font-semibold py-3 px-6 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition duration-300">
+                        Learn More About Password Security
+                    </button>
+                </div>
+            </div>
+            <div class="p-8 md:p-12 bg-gray-50">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Password Security Check</h2>
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Enter Password:</label>
+                    <input type="text" id="user-password" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your password" oninput="displayStrength(this.value)">
+                    <p id="strength-text" class="text-sm text-gray-600 mt-1">Enter a password to check its strength.</p>
+                </div>
+                <div>
+                    <label for="password-length" class="block text-gray-700 text-sm font-bold mb-2">Strength:</label>
+                    <div id="password-feedback" class="py-3 px-5 bg-gray-200 font-bold text-center strength-bar">No Password</div>
+                </div>
+
+
+                <hr class="w-full border-t-2 border-gray-300 my-4">
+
+                <div>
+                    <label for="password-length" class="block text-gray-700 text-sm font-bold mb-2">Password Length:</label>
+                    <input type="number" id="password-length" value="12" min="12" max="20" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+
+                <div class="mt-4">
+                    <label for="password-length" class="block text-gray-700 text-sm font-bold mb-2">Generated Password:</label>
+                    <div id="generated-password"class="py-3 px-5 text-center strength-bar">No Password</div>
+
+                </div>
+
+                <div class="mt-8 text-center">
+                    <button onclick="displayGeneratedPassword()" class="bg-black hover:bg-white hover:text-black text-white font-semibold py-3 px-6 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition duration-300">
+                        Generate Secure Password
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-white shadow-md mt-10 py-4 text-center text-gray-600">
+        <p>&copy; 2025 Secure Password Hub. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
